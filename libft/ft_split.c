@@ -19,11 +19,11 @@ static unsigned int			ft_getstrnb(char const *s, char c)
 
 	i = 0;
 	str_nb = 0;
-	if (s[0] != c)
+	if (s && s[0] != c)
 		str_nb++;
 	while (s[i])
 	{
-		if (s[i] && s[i] != c && s[i - 1] == c && i > 0)
+		if (s[i] && i > 0 && s[i] != c && s[i - 1] == c)
 			str_nb++;
 		i++;
 	}
@@ -32,12 +32,17 @@ static unsigned int			ft_getstrnb(char const *s, char c)
 
 static	void				ft_getstr(char **buf, size_t *str_len, char c)
 {
+	int					i;
+
+	i = 0;
+	*buf = *buf + *str_len;
+	*str_len = 0;
 	while (**buf && **buf == c)
 		(*buf)++;
-	while (**buf && **buf != c)
+	while ((*buf)[i] && (*buf)[i] != c)
 	{
-		str_len++;
-		(*buf)++;
+		(*str_len)++;
+		i++;
 	}
 }
 
@@ -76,7 +81,7 @@ char						**ft_split(char const *s, char c)
 		ft_getstr(&buf, &str_len, c);
 		if (!(res[i] = (char *)malloc(sizeof(char) * (str_len + 1))))
 			return (ft_freemem(res));
-		ft_strlcpy(res[i], buf, str_len);
+		ft_strlcpy(res[i], buf, str_len + 1);
 		i++;
 	}
 	res[i] = '\0';

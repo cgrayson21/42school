@@ -26,7 +26,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	if (dest_ptr > src_ptr)
 	{
 		while (n--)
-			dest_ptr[n - 1] = src_ptr[n - 1];
+			dest_ptr[n] = src_ptr[n];
 	}
 	else
 	{
