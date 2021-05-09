@@ -79,7 +79,7 @@ static char	**ft_split_str(char **res, unsigned int str_nb, \
 		ft_strlcpy(res[i], buf, str_len + 1);
 		i++;
 	}
-	res[i] = '\0';
+	res[i] = (void *)0;
 	return (res);
 }
 
