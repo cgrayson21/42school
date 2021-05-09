@@ -6,13 +6,13 @@
 /*   By: cgrayson <cgrayson@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/20 16:31:26 by cgrayson          #+#    #+#             */
-/*   Updated: 2021/04/23 13:41:23 by cgrayson         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:54:51 by cgrayson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcpy(char *dst, const char *src)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (src[i] != '\0')

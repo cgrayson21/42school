@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int		ft_len(int n)
+static int	ft_len(int n)
 {
 	int		len;
 
@@ -27,7 +27,7 @@ static int		ft_len(int n)
 	return (len);
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int			len;
 	char		*res;
@@ -35,7 +35,8 @@ char			*ft_itoa(int n)
 
 	nbr = n;
 	len = ft_len(nbr);
-	if(!(res = (char *)malloc(sizeof(char) * (len + 1))));
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
 		return (NULL);
 	if (nbr < 0)
 		nbr = -nbr;

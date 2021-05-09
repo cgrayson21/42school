@@ -12,7 +12,21 @@
 
 #include "libft.h"
 
-static unsigned int			ft_getstrnb(char const *s, char c)
+static char	**ft_freemem(char **res)
+{
+	unsigned int		i;
+
+	i = 0;
+	while (res[i])
+	{
+		free(res[i]);
+		i++;
+	}
+	free(res);
+	return (NULL);
+}
+
+static unsigned int	ft_getstrnb(char const *s, char c)
 {
 	unsigned int		i;
 	unsigned int		str_nb;
@@ -30,7 +44,7 @@ static unsigned int			ft_getstrnb(char const *s, char c)
 	return (str_nb);
 }
 
-static	void				ft_getstr(char **buf, size_t *str_len, char c)
+static void	ft_getstr(char **buf, size_t *str_len, char c)
 {
 	int					i;
 
@@ -46,44 +60,46 @@ static	void				ft_getstr(char **buf, size_t *str_len, char c)
 	}
 }
 
-static	char				**ft_freemem(char **res)
+static char	**ft_split_str(char **res, unsigned int str_nb, \
+							const char *s, char c)
 {
 	unsigned int		i;
-
-	i = 0;
-	while (res[i])
-	{
-		free(res[i]);
-		i++;
-	}
-	free(res);
-	return (NULL);
-}
-
-char						**ft_split(char const *s, char c)
-{
-	unsigned int		i;
-	unsigned int		str_nb;
 	size_t				str_len;
-	char				**res;
 	char				*buf;
 
 	i = 0;
 	str_len = 0;
 	buf = (char *)s;
-	if (!s)
-		return (NULL);
-	str_nb = ft_getstrnb(s, c);
-	if (!(res = (char **)malloc(sizeof(char *) * (str_nb + 1))))
-		return (NULL);
 	while (i < str_nb)
 	{
 		ft_getstr(&buf, &str_len, c);
-		if (!(res[i] = (char *)malloc(sizeof(char) * (str_len + 1))))
+		res[i] = (char *)malloc(sizeof(char) * (str_len + 1));
+		if (!res[i])
 			return (ft_freemem(res));
 		ft_strlcpy(res[i], buf, str_len + 1);
 		i++;
 	}
 	res[i] = '\0';
+	return (res);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	unsigned int		str_nb;
+	char				**res;
+
+	if (!s || !*s)
+	{
+		res = malloc(sizeof(char *) * 1);
+		if (!res)
+			return (NULL);
+		*res = (void *)0;
+		return (res);
+	}
+	str_nb = ft_getstrnb(s, c);
+	res = (char **)malloc(sizeof(char *) * (str_nb + 1));
+	if (!res)
+		return (NULL);
+	ft_split_str(res, str_nb, s, c);
 	return (res);
 }
