@@ -20,7 +20,14 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
-}				t_list;
+}					t_list;
+
+typedef struct s_btree
+{
+	struct s_btree	*left;
+	struct s_btree	*right;
+	void			*item;
+}					t_btree;
 
 size_t			ft_strlen(const char *s);
 int				ft_isalpha(int c);
@@ -69,9 +76,19 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
 				void (*del)(void *));
 
-/*
-int				ft_islower(int c);
-int				ft_isupper(int c);
-*/
+int				ft_islower_bonus(int c);
+int				ft_isupper_bonus(int c);
+char			*ft_strcpy_bonus(char *dst, const char *src);
+char			*ft_strncpy_bonus(char *dst, const char *src, size_t len);
+char			*ft_strcat_bonus(char *dest, const char *src);
+int				ft_strcmp_bonus(const char *s1, const char *s2);
+char			*ft_strncat_bonus(char *dest, const char *src, size_t n);
+t_btree			*ft_btreenew_bonus(void *item);
+void			ft_btree_apply_infix_bonus(t_btree *root, \
+				void (*applyf)(void *));
+void			ft_btree_apply_prefix_bonus(t_btree *root, \
+				void (*applyf)(void *));
+void			ft_btree_apply_suffix_bonus(t_btree *root, \
+				void (*applyf)(void *));
 
 #endif

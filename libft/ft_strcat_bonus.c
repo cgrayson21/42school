@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strcat_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cgrayson <cgrayson@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/20 16:31:26 by cgrayson          #+#    #+#             */
-/*   Updated: 2021/05/09 18:54:51 by cgrayson         ###   ########.fr       */
+/*   Created: 2021/05/10 12:49:54 by cgrayson          #+#    #+#             */
+/*   Updated: 2021/05/10 13:03:36 by cgrayson         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dst, const char *src)
+#include "libft.h"
+
+char	*ft_strcat_bonus(char *dest, const char *src)
 {
-	int		i;
+	size_t	i;
+	size_t	l;
 
 	i = 0;
+	l = ft_strlen(dest);
 	while (src[i] != '\0')
 	{
-		dst[i] = src[i];
+		dest[l + i] = src[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (*dst);
+	dest[l + i] = '\0';
+	return (dest);
 }
